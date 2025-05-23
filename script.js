@@ -1,12 +1,9 @@
-// The Power Lightning oordinates that Thor must reach
 
-const lightX = 3;
-const lightY = 8;
+let lightX
+let lightY
 
-// Thor's cordinates at the beginning of his journey
-
-let initialTX = 3;
-let initialTY = 6;
+let initialTX
+let initialTY
 
 // Thor's new cordinates after the player's move
 
@@ -28,14 +25,32 @@ const mapMaxY = 17;
 function lancerJeu() {
   // On démarre en demandant au joueur de saisir une direction
 
+  let playerChoiceLightX = prompt(`Aidez Thor à rejoindre l'éclair de pouvoir ! Tout d'abord, donnez une position "X" à l'éclair entre 0 et 39 :`);
+
+  let playerChoiceLightY = prompt(`Ensuite, donnez une position "X" à l'éclair entre 0 et 17 :`);
+
+  let playerChoiceThorX = prompt(`Maintenant, donnez une position "X" à Thor entre 0 et 39 :`);
+
+  let playerChoiceThorY = prompt(`Et enfin, donnez une position "Y" à Thor entre 0 et 17 :`);
+
+
+  // The Power Lightning oordinates that Thor must reach according to the player's choice
+lightX = Number(playerChoiceLightX);
+lightY = Number(playerChoiceLightY);
+
+// Thor's cordinates at the beginning of his journey according to the player's choice
+initialTX = Number(playerChoiceThorX);
+initialTY = Number(playerChoiceThorY);
+
   let message = prompt(
-    "Aidez Thor à rejoindre l'éclair de pouvoir ! Choisissez une direction parmi les suivantes : N (Nord) ; NE (Nord-Est) ; E (Est) ; SE (Sud-Est) ; S (Sud) ; SW (Sud-Ouest) ; W (Ouest) ; NW (Nord-Ouest)."
+    "Choisissez une direction parmi les suivantes : N (Nord) ; NE (Nord-Est) ; E (Est) ; SE (Sud-Est) ; S (Sud) ; SW (Sud-Ouest) ; W (Ouest) ; NW (Nord-Ouest)."
   );
 
   // On démarre une boucle où on exécute la direction du joueur
 
   while (endGame === true) {
-    d = message;
+
+      d = message;
     
     if (d === "N") {
       initialTY -= 1;
@@ -75,8 +90,16 @@ function lancerJeu() {
       initialTY === mapMaxY + 1
     ) {
       return alert("Défaite...");
+    } else if (initialTX === 4 && initialTY === 8) {
+      for (let i = 3 ; i > 0; i--) {
+        if (i > 0){
+          message = prompt(`Oups ! Vous venez de tomber sur Hela et vous n'avez plus que ${i - 1}/3 vies ; choisissez vite une autre direction :`);
+        } else if (i === 0) {
+          return alert("Mince, vous venez de croiser Hela, c'est fini pour vous !");
+        }
+      }
     } else {
-      let messageUpdate = prompt(
+      message = prompt(
         `Vous n'y êtes pas encore : choisissez une direction parmi les suivantes : N (Nord) ; NE (Nord-Est) ; E (Est) ; SE (Sud-Est) ; S (Sud) ; SW (Sud-Ouest) ; W (Ouest) ; NW (Nord-Ouest).`
       );
     }
