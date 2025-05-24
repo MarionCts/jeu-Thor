@@ -13,6 +13,13 @@ let d
 
 let endGame = true;
 
+// Sets the initial amount of Thor's lives at "3"
+
+let counting = 3;
+
+let helaTrapX = 4;
+let helaTrapY = 8;
+
 // The extreme cordinates of the 40 cases game
 
 const mapMinX = 0;
@@ -90,15 +97,14 @@ initialTY = Number(playerChoiceThorY);
       initialTY === mapMaxY + 1
     ) {
       return alert("Défaite...");
-    } else if (initialTX === 4 && initialTY === 8) {
-      for (let i = 3 ; i > 0; i--) {
-        if (i > 0){
-          message = prompt(`Oups ! Vous venez de tomber sur Hela et vous n'avez plus que ${i - 1}/3 vies ; choisissez vite une autre direction :`);
-        } else if (i === 0) {
-          return alert("Mince, vous venez de croiser Hela, c'est fini pour vous !");
-        }
-      }
-    } else {
+    } else if (initialTX === helaTrapX && initialTY === helaTrapY) {
+          counting -= 1;
+          if (counting > 0) {
+            message = prompt(`Oups ! Vous venez de tomber sur Hela et vous n'avez plus que ${counting} vies ; choisissez vite une autre direction :`);
+    } else if (counting === 0) {
+          return alert("Défaite...");
+    }
+    }else {
       message = prompt(
         `Vous n'y êtes pas encore : choisissez une direction parmi les suivantes : N (Nord) ; NE (Nord-Est) ; E (Est) ; SE (Sud-Est) ; S (Sud) ; SW (Sud-Ouest) ; W (Ouest) ; NW (Nord-Ouest).`
       );
