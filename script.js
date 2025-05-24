@@ -27,9 +27,7 @@ const mapMinY = 0;
 const mapMaxX = 39;
 const mapMaxY = 17;
 
-// The game starts here
 
-function lancerJeu() {
   // On démarre en demandant au joueur de saisir une direction
 
   let playerChoiceLightX = prompt(`Aidez Thor à rejoindre l'éclair de pouvoir ! Tout d'abord, donnez une position "X" à l'éclair entre 0 et 39 :`);
@@ -89,30 +87,29 @@ initialTY = Number(playerChoiceThorY);
     );
 
     if (initialTX === lightX && initialTY === lightY) {
-      return alert("Victoire !");
+      alert("Victoire !");
+      endGame = false;
     } else if (
       initialTX === mapMinX - 1 ||
       initialTY === mapMinY - 1 ||
       initialTX === mapMaxX + 1 ||
       initialTY === mapMaxY + 1
     ) {
-      return alert("Défaite...");
+      alert("Défaite...");
+      endGame = false;
     } else if (initialTX === helaTrapX && initialTY === helaTrapY) {
           counting -= 1;
           if (counting > 0) {
             message = prompt(`Oups ! Vous venez de tomber sur Hela et vous n'avez plus que ${counting} vies ; choisissez vite une autre direction :`);
     } else if (counting === 0) {
-          return alert("Défaite...");
+          alert("Défaite...");
+          endGame = false;
     }
-    }else {
+    } else {
       message = prompt(
         `Vous n'y êtes pas encore : choisissez une direction parmi les suivantes : N (Nord) ; NE (Nord-Est) ; E (Est) ; SE (Sud-Est) ; S (Sud) ; SW (Sud-Ouest) ; W (Ouest) ; NW (Nord-Ouest).`
       );
     }
   } 
-  endGame = false;
-}
 
-lancerJeu();
-NaN;
 console.log(`Voici vos coordonnées finales : ${initialTX}, ${initialTY}`);
